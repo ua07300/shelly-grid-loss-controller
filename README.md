@@ -14,14 +14,14 @@ When the central grid fails, the household switches to inverter (battery) power.
 
 The system consists of two scripts that work as a pair.
 
-**[master.mjs](master.mjs)** — installed on one Shelly device (the Master). It detects the state of the central grid and dispatches commands to the executors. Detection uses two independent channels:
+**[master.js](master.js)** — installed on one Shelly device (the Master). It detects the state of the central grid and dispatches commands to the executors. Detection uses two independent channels:
 
 - *Input detector* — the state of a digital input wired to a dry contact of a grid-presence contactor.
 - *Voltage detector* — voltage quality with hysteresis: it switches off when voltage leaves a wide band, and only permits switching on after voltage stays within a narrow band for a configured time.
 
 The "grid is present" decision is made only when both detectors agree (AND logic). If the device has no voltage measurement, only the Input channel is used. If no contactor is wired, only voltage is used.
 
-**[slave.mjs](slave.mjs)** — installed on each executor device (the Slave) that controls a non-critical load. It receives commands from the Master, executes them locally, and returns confirmation.
+**[slave.js](slave.js)** — installed on each executor device (the Slave) that controls a non-critical load. It receives commands from the Master, executes them locally, and returns confirmation.
 
 ---
 
