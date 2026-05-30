@@ -34,6 +34,7 @@ The "grid is present" decision is made only when both detectors agree (AND logic
 - **Sequential recovery** — after the grid returns, loads are switched on one by one with a pause, to avoid simultaneous inrush load.
 - **All settings in code** — no external dependencies, KVS is not used.
 - **Events via MQTT** — the Master publishes all decisions and errors via NotifyEvent for tracking by a controlling app.
+**📄 [System architecture diagram (PDF)](Architecture.pdf)**
 
 ---
 
@@ -72,6 +73,8 @@ The "grid is present" decision is made only when both detectors agree (AND logic
 The Master needs to know whether the central grid is present. Since power to the house is not interrupted after a grid loss (the inverter keeps running), the mere presence of voltage at an outlet does not indicate the grid state. Therefore a dedicated sensor is needed specifically on the central-grid line — ahead of the inverter input. The contactor plays this role: its coil "senses" the grid, and its power contact passes that state to a Shelly input as a dry contact.
 
 ### Wiring diagram
+
+**📄 [Wiring diagram (PDF)](Wiring.pdf)**
 
 **The contactor coil (terminals A1, A2)** is connected to the monitored line — the central grid ahead of the inverter input. The connection is not phase-dependent; as an example, take L on A1, N on A2.
 
