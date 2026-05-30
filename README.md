@@ -34,7 +34,7 @@ The "grid is present" decision is made only when both detectors agree (AND logic
 - **Sequential recovery** — after the grid returns, loads are switched on one by one with a pause, to avoid simultaneous inrush load.
 - **All settings in code** — no external dependencies, KVS is not used.
 - **Events via MQTT** — the Master publishes all decisions and errors via NotifyEvent for tracking by a controlling app.
-**📄 [System architecture diagram (PDF)](Architecture.pdf)**
+- **📄 [System architecture diagram (PDF)](Architecture.pdf)**
 
 ---
 
