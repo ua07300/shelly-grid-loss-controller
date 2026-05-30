@@ -51,7 +51,7 @@ The "grid is present" decision is made only when both detectors agree (AND logic
 
 **Configuration:**
 
-- Master — a Shelly 1PM Gen4 on a line with voltage measurement; a dry contact of a grid-presence contactor is wired to its input.
+- Master — a Shelly 1PM Gen2+ (Shelly 1 Gen2+, Shelly 1PM Mini Gen2+, Shelly 1 Mini Gen2+, Shelly i4 Gen2+, Shelly PRO 1PM Gen2+, Shelly PRO 1 Gen2+) on a line with voltage measurement; a dry contact of a grid-presence contactor is wired to its input.
 - Slave 1 — Shelly on the water heater (switched on first on recovery).
 - Slave 2 — Shelly on the pool pump.
 - Slave 3 — Shelly on the underfloor heating.
@@ -80,26 +80,16 @@ The Master needs to know whether the central grid is present. Since power to the
 
 **The contactor power contact (terminals 1, 2)** is used as a dry signaling contact:
 
-- terminal `1` → connected to the neutral `N` of the backup supply (the same one that powers the Shelly);
+- terminal `1` → connected to the neutral `L` of the backup supply (the same one that powers the Shelly);
 - terminal `2` → connected to the `SW` terminal of the Shelly relay (Master).
 
 **Powering the Shelly itself (Master and all Slaves)** — must come from the backup source (the inverter output), not from the central grid. Otherwise, when the grid fails, the Shelly itself loses power and the entire system stops working exactly when it is needed.
-
-### Why N is fed to the signaling contact, not L
-
-The `SW` input on a Shelly Gen4 determines its state by the presence of an electric potential on it relative to the device's own supply. A common misconception is that `SW` must necessarily be fed phase `L`. For **controlling a load with an external switch** that is indeed how it's done: the switch passes the phase to `SW`. But our task is different — not to control, but only to **read whether the contact is closed or not**.
-
-For reading the contact state, it does not matter which conductor is closed through it. Closing the neutral `N` through the contactor's dry contact gives the same result `input:0 state:true` as closing the phase. So we use `N` for three reasons:
-
-1. **Safety.** There is no phase on the signal wire from the contactor to the Shelly. Touching this circuit during installation or maintenance is safer.
-2. **The Shelly relay's power contacts are not used.** We use only the `SW` input. The relay's output power contacts (`O`/`I`) remain free — they are not needed on the Master, because the Master switches nothing itself and only detects and controls others over the network.
-3. **Minimal load on the contactor contact.** Only a microcurrent (milliamps) flows through the `SW` input, not the working load. The contactor contact operates in the lightest possible mode and its lifespan is practically unaffected.
 
 ### Logic of operation
 
 | Grid state | Coil A1-A2 | Contact 1-2 | Signal on SW | `input:0` | Master decision |
 |---|---|---|---|---|---|
-| Present | energized | closed | N arrives | `state:true` | grid_present=true |
+| Present | energized | closed | L arrives | `state:true` | grid_present=true |
 | Absent | de-energized | open | nothing | `state:false` | grid_present=false |
 
 ### Note on contact selection
