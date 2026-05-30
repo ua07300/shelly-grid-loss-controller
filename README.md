@@ -112,7 +112,7 @@ Make sure all Shelly devices:
 
 ### Step 2. Mount the detector contactor
 
-Wire the contactor according to section 5. Before installing the scripts, verify that `input:0` on the Master correctly changes state when the central grid is switched off/on (visible in the Master's web interface, the Components section).
+Wire the contactor according to section 5. Before installing the scripts, verify that `input:0` on the Master correctly changes state when the central grid is switched off/on (visible in the Master's Web UI).
 
 ### Step 3. Install the Slave (on each executor)
 
