@@ -80,7 +80,7 @@ The Master needs to know whether the central grid is present. Since power to the
 
 **The contactor power contact (terminals 1, 2)** is used as a dry signaling contact:
 
-- terminal `1` → connected to the neutral `L` of the backup supply (the same one that powers the Shelly);
+- terminal `1` → connected to the line `L` of the backup supply (the same one that powers the Shelly);
 - terminal `2` → connected to the `SW` terminal of the Shelly relay (Master).
 
 **Powering the Shelly itself (Master and all Slaves)** — must come from the backup source (the inverter output), not from the central grid. Otherwise, when the grid fails, the Shelly itself loses power and the entire system stops working exactly when it is needed.
